@@ -3,24 +3,27 @@ class Counter {
     this.numberOfSeconds = numberOfSeconds;
     this.count = numberOfSeconds;
     this.timerId;
-    this.callback;
   }
-  decrementCount() {
+  decrementCount(callback) {
     if (this.count > 1) {
       this.count--;
-      this.callback(this.count);
+      callback(this.count);
       return;
-    } else {
-      this.stop(this.callback);
     }
+    this.stop(callback);
   }
   start(callback) {
     this.count = this.numberOfSeconds;
     callback(this.count);
-    this.callback = callback;
-    this.timerId = setInterval(this.decrementCount.bind(this), 1000);
+    this.timerId = setInterval(
+      function() {
+        this.decrementCount(callback);
+      }.bind(this),
+      1000
+    );
   }
   stop(callback) {
+    showAndHideButtons("stop");
     callback("TIMES UP!");
     clearInterval(this.timerId);
   }

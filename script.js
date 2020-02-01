@@ -16,22 +16,16 @@ const config = {
 
 const game = new Game(config);
 
-game.updateScoreTable();
-
 function switchTeams({ target }) {
   const currentTeam = game.setActiveTeam(target.value);
   render(currentTeamOutput, currentTeam);
   render(mainHeading, `Team ${currentTeam}, are you ready?`);
   showAndHideButtons("stop");
-  game.updateScoreTable();
-  game.cancelTimer();
-  timeContainer.innerText = "";
 }
 
 function handleGameResponse({ target }) {
   const response = game.handleGamePlay(target.value);
   render(mainHeading, response);
-  game.updateScoreTable();
   showAndHideButtons("start");
 }
 

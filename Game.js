@@ -15,6 +15,7 @@ class Game {
     this.table = scoreContainer;
     this.secondsPerRound = secondsPerRound;
     this.counter = new Counter(secondsPerRound);
+    this.updateScoreTable();
   }
   get currentTeam() {
     return this.activeTeam + 1;
@@ -23,6 +24,7 @@ class Game {
     return this.questions[this.currentQuestionIndex].text;
   }
   setActiveTeam(direction) {
+    this.cancelTimer("Ready?");
     switch (direction) {
       case "up":
         if (this.activeTeam < this.numberOfTeams - 1) {
@@ -30,6 +32,7 @@ class Game {
         } else {
           this.activeTeam = 0;
         }
+        this.updateScoreTable();
         break;
       case "down":
         if (this.activeTeam > 0) {
@@ -37,6 +40,7 @@ class Game {
         } else {
           this.activeTeam = this.numberOfTeams - 1;
         }
+        this.updateScoreTable();
         break;
       default:
         return;
@@ -47,6 +51,7 @@ class Game {
     switch (action) {
       case "correct":
         this.scores[this.activeTeam]++;
+        this.updateScoreTable();
       case "pass":
         this.nextQuestion();
         return this.currentQuestion;
@@ -72,10 +77,10 @@ class Game {
       }.bind(this)
     );
   }
-  cancelTimer() {
+  cancelTimer(overrideMessage) {
     this.counter.stop(
       function(message) {
-        this.timeContainer.innerText = message;
+        this.timeContainer.innerText = overrideMessage || message;
       }.bind(this)
     );
   }
