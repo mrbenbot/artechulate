@@ -36,7 +36,8 @@ function renderClockCircle(count, numberOfSeconds, timeContainer) {
   for (let i = 0; i < count; i++) {
     const div = document.createElement("div");
     div.classList.add("clock-circle");
-    div.style.transform = `rotate(${(360 / numberOfSeconds) * i}deg)`;
+    div.style.transform = `rotate(${(360 / numberOfSeconds) *
+      i}deg) translateY(-5px)`;
     timeContainer.appendChild(div);
   }
 }
