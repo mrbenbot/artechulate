@@ -21,7 +21,7 @@ class Counter {
     this.timerId = setInterval(this.decrementCount.bind(this), 1000);
   }
   stop(callback) {
-    callback("STOP");
+    callback("TIMES UP!");
     clearInterval(this.timerId);
   }
 }

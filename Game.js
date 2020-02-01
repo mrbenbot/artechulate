@@ -2,7 +2,7 @@ class Game {
   constructor({
     questions = [],
     numberOfTeams = 6,
-    timeContainer,
+    scoreContainer,
     table,
     secondsPerRound = 30
   }) {
@@ -12,7 +12,7 @@ class Game {
     this.activeTeam = 0;
     this.currentQuestionIndex = 0;
     this.timeContainer = timeContainer;
-    this.table = table;
+    this.table = scoreContainer;
     this.secondsPerRound = secondsPerRound;
     this.counter = new Counter(secondsPerRound);
   }

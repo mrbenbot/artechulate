@@ -10,7 +10,7 @@ const config = {
   questions: [...week_1, ...week_2],
   numberOfTeams: 6,
   timeContainer: timeContainer,
-  table: document.querySelector("table"),
+  scoreContainer: document.querySelector("table"),
   secondsPerRound: 30
 };
 
