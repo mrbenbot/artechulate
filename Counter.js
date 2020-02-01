@@ -11,8 +11,7 @@ class Counter {
       this.callback(this.count);
       return;
     } else {
-      this.callback("STOP");
-      clearInterval(this.timerId);
+      this.stop(this.callback);
     }
   }
   start(callback) {
@@ -20,5 +19,9 @@ class Counter {
     callback(30);
     this.callback = callback;
     this.timerId = setInterval(this.decrementCount.bind(this), 1000);
+  }
+  stop(callback) {
+    callback("STOP");
+    clearInterval(this.timerId);
   }
 }

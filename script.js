@@ -4,12 +4,12 @@ const startButton = document.querySelector(`.game-buttons[value="start"]`);
 const gameButtons = arraySelector(
   `.game-buttons[value="correct"],.game-buttons[value="pass"]`
 );
-const time = document.querySelector("time");
+const timeContainer = document.querySelector("#time-container");
 
 const config = {
   questions: [...week_1, ...week_2],
   numberOfTeams: 6,
-  counter: time,
+  timeContainer: timeContainer,
   table: document.querySelector("table")
 };
 
@@ -23,7 +23,7 @@ function switchTeams({ target }) {
   render(mainHeading, `Team ${currentTeam}, are you ready?`);
   showAndHideButtons("stop");
   game.updateScoreTable();
-  time.innerText = "Ready?";
+  timeContainer.innerText = "";
 }
 
 function handleGameResponse({ target }) {

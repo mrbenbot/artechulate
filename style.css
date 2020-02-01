@@ -6,11 +6,22 @@ body {
 h1 {
   font-size: 4em;
 }
+#time-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.clock-circle {
+  height: 100%;
+  width: 2px;
+  position: absolute;
+  border-top: 10px solid black;
+}
 time {
-  position: fixed;
+  display: inline-block;
   font-size: 30px;
   padding: 15px;
-  border: 3px dotted palevioletred;
+  text-align: center;
 }
 .game-buttons {
   padding: 20px;

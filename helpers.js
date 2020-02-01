@@ -32,3 +32,16 @@ function getInitialScoreObject(numTeams) {
   }
   return teamScoreObj;
 }
+
+function renderClockCircle(count, timeContainer) {
+  timeContainer.innerHTML = "";
+  const time = document.createElement("time");
+  time.innerText = count;
+  timeContainer.appendChild(time);
+  for (let i = 0; i < count; i++) {
+    const div = document.createElement("div");
+    div.classList.add("clock-circle");
+    div.style.transform = `rotate(${(360 / 30) * i}deg)`;
+    timeContainer.appendChild(div);
+  }
+}
