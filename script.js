@@ -12,7 +12,9 @@ const config = {
 };
 
 const game = new Game(config);
+
 rerenderTable();
+
 function switchTeams({ target }) {
   const currentTeam = game.setActiveTeam(target.value);
   render(currentTeamOutput, currentTeam);
