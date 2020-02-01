@@ -1,0 +1,50 @@
+body {
+  font-family: "Open Sans", sans-serif;
+  min-height: 100vh;
+  background-image: linear-gradient(yellow, orange);
+}
+h1 {
+  margin-top: 100px;
+  font-size: 4em;
+}
+.game-buttons {
+  padding: 20px;
+  font-size: 2rem;
+}
+#questions {
+  text-align: center;
+}
+#table-container {
+  width: 300px;
+  justify-content: center;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 10vh;
+}
+#table-container > div {
+  text-align: center;
+}
+.hidden {
+  display: none;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(110, 99, 0, 0.3);
+}
+.active-team {
+  background-color: hotpink !important;
+}

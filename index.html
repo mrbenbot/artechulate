@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <section id="questions">
+      <h1 id="h1">team 1, are you ready?</h1>
+      <button class="game-buttons button hidden" value="correct">
+        Correct
+      </button>
+      <button class="game-buttons button hidden" value="pass">Pass</button>
+      <button class="game-buttons button" value="start">START</button>
+    </section>
+    <section id="table-container">
+      <table></table>
+
+      <div>
+        <label>active team</label>
+        <button class="team-buttons button" value="down">-</button>
+        <output>1</output>
+        <button class="team-buttons button" value="up">+</button>
+      </div>
+    </section>
+    <script src="Game.js"></script>
+    <script src="week_1.js"></script>
+    <script src="week_2.js"></script>
+    <script src="helpers.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
