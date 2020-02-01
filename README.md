@@ -2,4 +2,4 @@
 
 Articulate but for tech.
 
-Made for use on the [School Of Code](www.schoolofcode.com) Bootcamp.
+Made for use on the [School Of Code](https://www.schoolofcode.com) Bootcamp.
