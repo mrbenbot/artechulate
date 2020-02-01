@@ -1,10 +1,13 @@
 class Game {
-  constructor({ questions, numberOfTeams }) {
+  constructor({ questions, numberOfTeams, counter, table }) {
     this.questions = shuffle(questions);
     this.scores = getInitialScoreObject(numberOfTeams);
     this.numberOfTeams = numberOfTeams;
     this.activeTeam = 0;
     this.currentQuestionIndex = 0;
+    this.counterElement = counter;
+    this.table = table;
+    this.counter = new Counter(30);
   }
   get currentTeam() {
     return this.activeTeam + 1;
@@ -37,11 +40,13 @@ class Game {
     switch (action) {
       case "correct":
         this.scores[this.activeTeam]++;
-      case "start":
       case "pass":
         this.nextQuestion();
         return this.currentQuestion;
-
+      case "start":
+        this.startTimer();
+        this.nextQuestion();
+        return this.currentQuestion;
       default:
         return `oops, something went wrong`;
     }
@@ -53,15 +58,26 @@ class Game {
     }
     this.currentQuestionIndex = 0;
   }
-  generateScoreTable(table) {
-    table.innerHTML = "";
+  startTimer() {
+    this.counter.start(
+      function(count) {
+        this.counterElement.innerText = count;
+      }.bind(this)
+    );
+  }
+  cancelTimer() {
+    this.counterElement.innerText = "ready";
+    clearInterval(this.timerId);
+  }
+  updateScoreTable() {
+    this.table.innerHTML = "";
     const headingRow = document.createElement("tr");
     ["Team", "Score"].forEach(heading => {
       const th = document.createElement("th");
       th.innerText = heading;
       headingRow.appendChild(th);
     });
-    table.appendChild(headingRow);
+    this.table.appendChild(headingRow);
     Object.entries(this.scores)
       .sort(([, value1], [, value2]) => value2 - value1)
       .forEach(array => {
@@ -74,7 +90,7 @@ class Game {
           td.innerText = i == 0 ? `Team ${Number(item) + 1}` : item;
           scoreRow.appendChild(td);
         });
-        table.appendChild(scoreRow);
+        this.table.appendChild(scoreRow);
       });
   }
 }

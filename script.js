@@ -1,32 +1,35 @@
 const currentTeamOutput = document.querySelector("output");
 const mainHeading = document.querySelector("h1");
-const table = document.querySelector("table");
 const startButton = document.querySelector(`.game-buttons[value="start"]`);
 const gameButtons = arraySelector(
   `.game-buttons[value="correct"],.game-buttons[value="pass"]`
 );
+const time = document.querySelector("time");
 
 const config = {
   questions: [...week_1, ...week_2],
-  numberOfTeams: 6
+  numberOfTeams: 6,
+  counter: time,
+  table: document.querySelector("table")
 };
 
 const game = new Game(config);
 
-rerenderTable();
+game.updateScoreTable();
 
 function switchTeams({ target }) {
   const currentTeam = game.setActiveTeam(target.value);
   render(currentTeamOutput, currentTeam);
-  render(mainHeading, `team ${currentTeam}, are you ready?`);
+  render(mainHeading, `Team ${currentTeam}, are you ready?`);
   showAndHideButtons("stop");
-  rerenderTable();
+  game.updateScoreTable();
+  time.innerText = "Ready?";
 }
 
 function handleGameResponse({ target }) {
   const response = game.handleGamePlay(target.value);
   render(mainHeading, response);
-  rerenderTable();
+  game.updateScoreTable();
   showAndHideButtons("start");
 }
 
@@ -44,9 +47,6 @@ function showAndHideButtons(action) {
       return;
   }
 }
-function rerenderTable() {
-  game.generateScoreTable(table);
-}
 
 function handleKeyDown(e) {
   if (!e.metaKey) {
@@ -56,7 +56,7 @@ function handleKeyDown(e) {
     case "Space":
       const action = startButton.classList.contains("hidden")
         ? "correct"
-        : "pass";
+        : "start";
       handleGameResponse({ target: { value: action } });
       break;
     case "KeyP":
