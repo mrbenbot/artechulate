@@ -7,105 +7,101 @@ class Game {
     secondsPerRound = 30
   }) {
     this.questions = shuffle(questions);
-    this.scores = getInitialScoreObject(numberOfTeams);
+    this.scores = Array(numberOfTeams).fill(0);
     this.numberOfTeams = numberOfTeams;
     this.activeTeam = 0;
     this.currentQuestionIndex = 0;
-    this.timeContainer = timeContainer;
     this.table = scoreContainer;
-    this.secondsPerRound = secondsPerRound;
-    this.counter = new Counter(secondsPerRound);
-    this.updateScoreTable();
+    this.counter = new Counter(secondsPerRound, timeContainer);
+    this.renderScoreTable();
   }
+
   get currentTeam() {
-    return this.activeTeam + 1;
+    return this.activeTeam;
   }
+
+  set currentTeam(dir) {
+    this.counter.reset();
+    const diff = dir === "up" ? 1 : -1;
+    this.activeTeam = (this.activeTeam + diff) % this.numberOfTeams;
+    if (this.activeTeam < 0) {
+      this.activeTeam = this.numberOfTeams - 1;
+    }
+    const activeRow = document.querySelector(".active-team");
+    if (activeRow.dataset.team !== this.activeTeam) {
+      activeRow.classList.remove("active-team");
+    }
+    const teamRow = document.querySelector(`[data-team="${this.activeTeam}"]`);
+    teamRow.classList.add("active-team");
+  }
+
+  get currentTeamName() {
+    return getTeamName(this.activeTeam);
+  }
+
   get currentQuestion() {
     return this.questions[this.currentQuestionIndex].text;
   }
-  setActiveTeam(direction) {
-    this.cancelTimer("Ready?");
-    switch (direction) {
-      case "up":
-        if (this.activeTeam < this.numberOfTeams - 1) {
-          this.activeTeam++;
-        } else {
-          this.activeTeam = 0;
-        }
-        this.updateScoreTable();
-        break;
-      case "down":
-        if (this.activeTeam > 0) {
-          this.activeTeam--;
-        } else {
-          this.activeTeam = this.numberOfTeams - 1;
-        }
-        this.updateScoreTable();
-        break;
-      default:
-        return;
-    }
-    return this.currentTeam;
-  }
+
   handleGamePlay(action) {
     switch (action) {
       case "correct":
         this.scores[this.activeTeam]++;
-        this.updateScoreTable();
+        this.updateTeamScoreTable(this.activeTeam);
       case "pass":
         this.nextQuestion();
         return this.currentQuestion;
       case "start":
-        this.startTimer();
+        this.counter.start();
         this.nextQuestion();
         return this.currentQuestion;
       default:
         return `oops, something went wrong`;
     }
   }
+
   nextQuestion() {
-    if (this.currentQuestionIndex < this.questions.length - 1) {
-      this.currentQuestionIndex++;
-      return;
+    if (this.currentQuestionIndex >= this.questions.length - 1) {
+      this.questions = shuffle(this.questions);
     }
-    this.currentQuestionIndex = 0;
+    this.currentQuestionIndex =
+      (this.currentQuestionIndex + 1) % this.questions.length;
   }
-  startTimer() {
-    this.counter.start(
-      function(count) {
-        renderClockCircle(count, this.secondsPerRound, this.timeContainer);
-      }.bind(this)
-    );
-  }
-  cancelTimer(overrideMessage) {
-    this.counter.stop(
-      function(message) {
-        this.timeContainer.innerText = overrideMessage || message;
-      }.bind(this)
-    );
-  }
-  updateScoreTable() {
+
+  renderScoreTable() {
     this.table.innerHTML = "";
-    const headingRow = document.createElement("tr");
-    ["Team", "Score"].forEach(heading => {
-      const th = document.createElement("th");
-      th.innerText = heading;
-      headingRow.appendChild(th);
-    });
+    const headingRow = createHeadingRow(["Team", "Score"]);
     this.table.appendChild(headingRow);
-    Object.entries(this.scores)
-      .sort(([, value1], [, value2]) => value2 - value1)
-      .forEach(array => {
-        const scoreRow = document.createElement("tr");
-        if (this.activeTeam == array[0]) {
-          scoreRow.classList.add(`active-team`);
-        }
-        array.forEach((item, i) => {
-          const td = document.createElement("td");
-          td.innerText = i == 0 ? `Team ${Number(item) + 1}` : item;
-          scoreRow.appendChild(td);
-        });
-        this.table.appendChild(scoreRow);
-      });
+    this.scores.forEach((score, i) => {
+      const scoreRow = document.createElement("tr");
+      scoreRow.dataset.team = i;
+      if (this.activeTeam == i) {
+        scoreRow.classList.add("active-team");
+      }
+      const teamName = document.createElement("td");
+      teamName.classList.add("team");
+      teamName.innerText = getTeamName(i);
+      scoreRow.appendChild(teamName);
+      const scoreDisplay = document.createElement("td");
+      scoreDisplay.classList.add("score");
+      scoreDisplay.innerText = score;
+      scoreRow.appendChild(scoreDisplay);
+      this.table.appendChild(scoreRow);
+    });
   }
+
+  updateTeamScoreTable(i) {
+    const teamRow = document.querySelector(`[data-team="${i}"]`);
+    teamRow.querySelector(".score").innerText = this.scores[i];
+  }
+}
+
+function createHeadingRow(headings) {
+  const headingRow = document.createElement("tr");
+  headings.forEach(heading => {
+    const th = document.createElement("th");
+    th.innerText = heading;
+    headingRow.appendChild(th);
+  });
+  return headingRow;
 }
