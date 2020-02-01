@@ -33,7 +33,7 @@ function getInitialScoreObject(numTeams) {
   return teamScoreObj;
 }
 
-function renderClockCircle(count, timeContainer) {
+function renderClockCircle(count, numberOfSeconds, timeContainer) {
   timeContainer.innerHTML = "";
   const time = document.createElement("time");
   time.innerText = count;
@@ -41,7 +41,7 @@ function renderClockCircle(count, timeContainer) {
   for (let i = 0; i < count; i++) {
     const div = document.createElement("div");
     div.classList.add("clock-circle");
-    div.style.transform = `rotate(${(360 / 30) * i}deg)`;
+    div.style.transform = `rotate(${(360 / numberOfSeconds) * i}deg)`;
     timeContainer.appendChild(div);
   }
 }

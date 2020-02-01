@@ -1,7 +1,7 @@
 class Counter {
   constructor(numberOfSeconds) {
     this.numberOfSeconds = numberOfSeconds;
-    this.count = 30;
+    this.count = numberOfSeconds;
     this.timerId;
     this.callback;
   }
@@ -15,8 +15,8 @@ class Counter {
     }
   }
   start(callback) {
-    this.count = 30;
-    callback(30);
+    this.count = this.numberOfSeconds;
+    callback(this.count);
     this.callback = callback;
     this.timerId = setInterval(this.decrementCount.bind(this), 1000);
   }

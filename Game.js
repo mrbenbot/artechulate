@@ -1,5 +1,11 @@
 class Game {
-  constructor({ questions, numberOfTeams, timeContainer, table }) {
+  constructor({
+    questions = [],
+    numberOfTeams = 6,
+    timeContainer,
+    table,
+    secondsPerRound = 30
+  }) {
     this.questions = shuffle(questions);
     this.scores = getInitialScoreObject(numberOfTeams);
     this.numberOfTeams = numberOfTeams;
@@ -7,7 +13,8 @@ class Game {
     this.currentQuestionIndex = 0;
     this.timeContainer = timeContainer;
     this.table = table;
-    this.counter = new Counter(30);
+    this.secondsPerRound = secondsPerRound;
+    this.counter = new Counter(secondsPerRound);
   }
   get currentTeam() {
     return this.activeTeam + 1;
@@ -61,7 +68,7 @@ class Game {
   startTimer() {
     this.counter.start(
       function(count) {
-        renderClockCircle(count, this.timeContainer);
+        renderClockCircle(count, this.secondsPerRound, this.timeContainer);
       }.bind(this)
     );
   }
