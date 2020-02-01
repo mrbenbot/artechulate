@@ -66,8 +66,6 @@ class Game {
       .sort(([, value1], [, value2]) => value2 - value1)
       .forEach(array => {
         const scoreRow = document.createElement("tr");
-        console.log(this.activeTeam);
-        console.log(array[1]);
         if (this.activeTeam == array[0]) {
           scoreRow.classList.add(`active-team`);
         }
