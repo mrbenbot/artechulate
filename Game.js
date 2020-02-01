@@ -2,8 +2,8 @@ class Game {
   constructor({
     questions = [],
     numberOfTeams = 6,
+    timeContainer,
     scoreContainer,
-    table,
     secondsPerRound = 30
   }) {
     this.questions = shuffle(questions);
