@@ -15,7 +15,7 @@ h1 {
   height: 100%;
   width: 2px;
   position: absolute;
-  border-top: 10px solid black;
+  border-top: 10px solid palevioletred;
 }
 time {
   display: inline-block;

@@ -23,6 +23,7 @@ function switchTeams({ target }) {
   render(mainHeading, `Team ${currentTeam}, are you ready?`);
   showAndHideButtons("stop");
   game.updateScoreTable();
+  game.cancelTimer();
   timeContainer.innerText = "";
 }
 
@@ -61,6 +62,12 @@ function handleKeyDown(e) {
       break;
     case "KeyP":
       handleGameResponse({ target: { value: "pass" } });
+      break;
+    case "Equal":
+      switchTeams({ target: { value: "up" } });
+      break;
+    case "Minus":
+      switchTeams({ target: { value: "down" } });
       break;
     default:
       return;
