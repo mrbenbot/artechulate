@@ -78,6 +78,7 @@ arraySelector(".game-buttons").forEach(button =>
   button.addEventListener("click", handleGameResponse)
 );
 document.querySelector("#open-settings").addEventListener("click", () => {
+  game.cancelTimer("game stopped");
   settingsModal.style.display = "flex";
 });
 document.querySelector("#close-settings").addEventListener("click", () => {
@@ -93,4 +94,5 @@ document.querySelector("#save-settings").addEventListener("click", () => {
   game.cancelTimer("settings saved ✅");
   game = new Game(config);
   settingsModal.style.display = "none";
+  render(mainHeading, `Team ${1}, are you ready?`);
 });
