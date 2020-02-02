@@ -61,8 +61,10 @@ function handleKeyDown(e) {
       handleGameResponse({ target: { value: "pass" } });
       break;
     case "ArrowDown":
+    case "ArrowLeft":
       switchTeams({ target: { value: "up" } });
       break;
+    case "ArrowRight":
     case "ArrowUp":
       switchTeams({ target: { value: "down" } });
       break;
