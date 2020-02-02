@@ -5,6 +5,7 @@ const gameButtons = arraySelector(
   `.game-buttons[value="correct"],.game-buttons[value="pass"]`
 );
 const timeContainer = document.querySelector("#time-container");
+const settingsModal = document.querySelector("#settings-container");
 
 const config = {
   questions: [...week_1, ...week_2],
@@ -14,7 +15,7 @@ const config = {
   secondsPerRound: 30
 };
 
-const game = new Game(config);
+let game = new Game(config);
 
 function switchTeams({ target }) {
   const currentTeam = game.setActiveTeam(target.value);
@@ -76,5 +77,20 @@ arraySelector(".team-buttons").forEach(button =>
 arraySelector(".game-buttons").forEach(button =>
   button.addEventListener("click", handleGameResponse)
 );
-
+document.querySelector("#open-settings").addEventListener("click", () => {
+  settingsModal.style.display = "flex";
+});
+document.querySelector("#close-settings").addEventListener("click", () => {
+  settingsModal.style.display = "none";
+});
 document.addEventListener("keydown", handleKeyDown);
+
+document.querySelector("#save-settings").addEventListener("click", () => {
+  const timeInput = document.querySelector(`input[id="time"]`);
+  const teamInput = document.querySelector(`input[id="team"]`);
+  config.numberOfTeams = teamInput.value;
+  config.secondsPerRound = timeInput.value;
+  game.cancelTimer("settings saved ✅");
+  game = new Game(config);
+  settingsModal.style.display = "none";
+});

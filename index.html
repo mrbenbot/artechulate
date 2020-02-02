@@ -12,6 +12,24 @@
     <link href="style.css" rel="stylesheet" />
   </head>
   <body>
+    <button id="open-settings" class="button-svg-override"></button>
+    <div id="settings-container">
+      <div id="settings-box">
+          <button id="close-settings" class="button-svg-override"></button>
+          <p><span>Warning:</span> these actions will destroy any current game.</p>
+          <form oninput="numTeams.value = team.value">
+            <input type="range" id="team" min="1" max="10" increment="1" value="6"></input>
+            <output name="numTeams" for="team">6</output><span> teams</span>
+            <div>
+            </form>
+            <form oninput="numSeconds.value = time.value">
+              <input type="range" id="time" min="15" max="180" step="15" value="30"></input>
+              <output name="numSeconds" for="time">30</output> <span> seconds</span>
+            </form>
+          </div>
+          <button id="save-settings">save changes</button>
+        </div>
+      </div>
     <div id="time-container">
       <time></time>
     </div>
