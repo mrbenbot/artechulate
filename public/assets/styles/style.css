@@ -70,8 +70,10 @@ h1 {
   position: absolute;
 }
 #time-container > time {
-  --timer-color: hotpink;
+  --timer-color-main: hotpink;
+  --timer-color-end: red;
   --timer-width: 4;
+  --timer-line-type: solid;
   font-size: 30px;
   padding: 15px;
   text-align: center;

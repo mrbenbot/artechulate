@@ -93,10 +93,15 @@ document.addEventListener("keydown", handleKeyDown);
 document.querySelector("#save-settings").addEventListener("click", () => {
   const timeInput = document.querySelector(`input[id="time"]`);
   const teamInput = document.querySelector(`input[id="team"]`);
+  const timerTypeSelector = document.querySelector(`#timer-type-selector`);
+  const timer = timeContainer.querySelector("time");
+
+  timer.style.setProperty("--timer-line-type", timerTypeSelector.value);
   config.numberOfTeams = teamInput.value;
   config.secondsPerRound = timeInput.value;
+
   game.timer.reset();
   game = new Game(config);
-  settingsModal.style.display = "none";
   mainHeading.innerText = `${game.currentTeamName}, are you ready?`;
+  settingsModal.style.display = "none";
 });
