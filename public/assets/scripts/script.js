@@ -83,6 +83,8 @@ document
 
 document.querySelector("#open-settings").addEventListener("click", () => {
   game.timer.stop();
+  settingsModal.classList.add("background-fade-in");
+  settingsModal.querySelector("#settings-box").classList.add("animate-in");
   settingsModal.style.display = "flex";
 });
 document.querySelector("#close-settings").addEventListener("click", () => {
