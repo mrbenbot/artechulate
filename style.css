@@ -31,11 +31,18 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(125, 125, 126, 0.8);
   z-index: 100;
   display: none;
   justify-content: center;
   align-items: center;
+}
+.background {
+  animation: add-background 0.2s linear 0s 1;
+  background-color: rgba(125, 125, 126, 0.8);
+}
+.animate-in {
+  animation: scale-in 0.5s linear 0s 1;
+  transform: scale(1) translate(0, 0) !important;
 }
 #settings-box {
   position: relative;
@@ -47,6 +54,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transform: scale(0) translate(50vw, -50vh);
 }
 #save-settings {
   margin-top: 20px;
@@ -123,4 +131,21 @@ tr:nth-child(even) {
 }
 .button-svg-override:hover {
   cursor: pointer;
+}
+
+@keyframes add-background {
+  0% {
+    background-color: rgba(125, 125, 126, 0);
+  }
+  100% {
+    background-color: rgba(125, 125, 126, 0.8);
+  }
+}
+@keyframes scale-in {
+  0% {
+    transform: scale(0) translate(50vw, -50vh);
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
 }

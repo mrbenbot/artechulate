@@ -80,6 +80,8 @@ arraySelector(".game-buttons").forEach(button =>
 document.querySelector("#open-settings").addEventListener("click", () => {
   game.cancelTimer("game stopped");
   settingsModal.style.display = "flex";
+  settingsModal.classList.add("background");
+  settingsModal.querySelector("div").classList.add("animate-in");
 });
 document.querySelector("#close-settings").addEventListener("click", () => {
   settingsModal.style.display = "none";
