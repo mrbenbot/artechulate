@@ -5,6 +5,7 @@ class Counter {
     this.timeText = timeContainer.querySelector("time");
     this.count = numberOfSeconds;
     this.timerId;
+    this.timeText.style.setProperty("--total-seconds", numberOfSeconds);
   }
 
   decrementCount() {
@@ -34,7 +35,6 @@ class Counter {
 
   renderClockCircle() {
     this.timeText.innerText = this.count;
-    const fraction = this.count / this.numberOfSeconds;
-    this.timeContainer.style.setProperty("--time", `${fraction + 0.5}`);
+    this.timeText.style.setProperty("--time", `${this.count}`);
   }
 }

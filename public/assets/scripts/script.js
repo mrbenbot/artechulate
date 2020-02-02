@@ -60,11 +60,13 @@ function handleKeyDown(e) {
     case "Backspace":
       handleGameResponse({ target: { value: "pass" } });
       break;
+    case "ArrowUp":
+    case "ArrowLeft":
+      switchTeams({ target: { value: "down" } });
+      break;
+    case "ArrowRight":
     case "ArrowDown":
       switchTeams({ target: { value: "up" } });
-      break;
-    case "ArrowUp":
-      switchTeams({ target: { value: "down" } });
       break;
     default:
       return;
@@ -81,6 +83,8 @@ document
 
 document.querySelector("#open-settings").addEventListener("click", () => {
   game.timer.stop();
+  settingsModal.classList.add("background-fade-in");
+  settingsModal.querySelector("#settings-box").classList.add("animate-in");
   settingsModal.style.display = "flex";
 });
 document.querySelector("#close-settings").addEventListener("click", () => {
@@ -91,10 +95,15 @@ document.addEventListener("keydown", handleKeyDown);
 document.querySelector("#save-settings").addEventListener("click", () => {
   const timeInput = document.querySelector(`input[id="time"]`);
   const teamInput = document.querySelector(`input[id="team"]`);
+  const timerTypeSelector = document.querySelector(`#timer-type-selector`);
+  const timer = timeContainer.querySelector("time");
+
+  timer.style.setProperty("--timer-line-type", timerTypeSelector.value);
   config.numberOfTeams = teamInput.value;
   config.secondsPerRound = timeInput.value;
+
   game.timer.reset();
   game = new Game(config);
-  settingsModal.style.display = "none";
   mainHeading.innerText = `${game.currentTeamName}, are you ready?`;
+  settingsModal.style.display = "none";
 });
