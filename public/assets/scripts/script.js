@@ -60,13 +60,13 @@ function handleKeyDown(e) {
     case "Backspace":
       handleGameResponse({ target: { value: "pass" } });
       break;
-    case "ArrowDown":
+    case "ArrowUp":
     case "ArrowLeft":
-      switchTeams({ target: { value: "up" } });
+      switchTeams({ target: { value: "down" } });
       break;
     case "ArrowRight":
-    case "ArrowUp":
-      switchTeams({ target: { value: "down" } });
+    case "ArrowDown":
+      switchTeams({ target: { value: "up" } });
       break;
     default:
       return;
