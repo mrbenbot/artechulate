@@ -1,10 +1,10 @@
-const currentTeamOutput = document.querySelector("output");
 const mainHeading = document.querySelector("h1");
 const startButton = document.querySelector(`.game-buttons[value="start"]`);
 const gameButtons = document.querySelectorAll(
   `.game-buttons[value="correct"],.game-buttons[value="pass"]`
 );
 const timeContainer = document.querySelector("#time-container");
+const settingsModal = document.querySelector("#settings-container");
 
 const config = {
   questions: [...week_1, ...week_2],
@@ -14,12 +14,12 @@ const config = {
   secondsPerRound: 30
 };
 
-const game = new Game(config);
+let game = new Game(config);
 
 function switchTeams({ target }) {
   game.currentTeam = target.value;
-  currentTeamOutput.innerText = game.currentTeamName;
-  mainHeading.innerText = `${game.currentTeamName}, are you ready?`;
+  const teamName = game.currentTeamName;
+  mainHeading.innerText = `${teamName}, are you ready?`;
   showAndHideButtons("stop");
 }
 
@@ -48,7 +48,6 @@ function handleKeyDown(e) {
   if (!e.metaKey) {
     e.preventDefault();
   }
-  console.log(e.code);
   switch (e.code) {
     case "Space":
     case "Enter":
@@ -80,4 +79,22 @@ document
   .querySelectorAll(".game-buttons")
   .forEach(button => button.addEventListener("click", handleGameResponse));
 
+document.querySelector("#open-settings").addEventListener("click", () => {
+  game.timer.stop();
+  settingsModal.style.display = "flex";
+});
+document.querySelector("#close-settings").addEventListener("click", () => {
+  settingsModal.style.display = "none";
+});
 document.addEventListener("keydown", handleKeyDown);
+
+document.querySelector("#save-settings").addEventListener("click", () => {
+  const timeInput = document.querySelector(`input[id="time"]`);
+  const teamInput = document.querySelector(`input[id="team"]`);
+  config.numberOfTeams = teamInput.value;
+  config.secondsPerRound = timeInput.value;
+  game.timer.reset();
+  game = new Game(config);
+  settingsModal.style.display = "none";
+  mainHeading.innerText = `${game.currentTeamName}, are you ready?`;
+});

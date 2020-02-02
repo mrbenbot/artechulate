@@ -7,13 +7,13 @@ class Game {
     secondsPerRound = 30
   }) {
     this.questions = shuffle(questions);
-    this.scores = Array(numberOfTeams).fill(0);
-    this.numberOfTeams = numberOfTeams;
+    this.numberOfTeams = Number(numberOfTeams);
+    this.scores = Array(this.numberOfTeams).fill(0);
     this.activeTeam = 0;
     this.currentQuestionIndex = 0;
     this.table = scoreContainer;
-    this.counter = new Counter(secondsPerRound, timeContainer);
-    this.renderScoreTable();
+    this.timer = new Counter(secondsPerRound, timeContainer);
+    this.renderGame();
   }
 
   get currentTeam() {
@@ -21,18 +21,13 @@ class Game {
   }
 
   set currentTeam(dir) {
-    this.counter.reset();
+    this.timer.reset();
     const diff = dir === "up" ? 1 : -1;
     this.activeTeam = (this.activeTeam + diff) % this.numberOfTeams;
     if (this.activeTeam < 0) {
       this.activeTeam = this.numberOfTeams - 1;
     }
-    const activeRow = document.querySelector(".active-team");
-    if (activeRow.dataset.team !== this.activeTeam) {
-      activeRow.classList.remove("active-team");
-    }
-    const teamRow = document.querySelector(`[data-team="${this.activeTeam}"]`);
-    teamRow.classList.add("active-team");
+    this.updateActiveDisplay();
   }
 
   get currentTeamName() {
@@ -41,6 +36,21 @@ class Game {
 
   get currentQuestion() {
     return this.questions[this.currentQuestionIndex].text;
+  }
+
+  renderGame() {
+    this.renderScoreTable();
+    this.updateActiveDisplay();
+    this.timer.reset();
+  }
+
+  updateActiveDisplay() {
+    const activeRow = document.querySelector(".active-team");
+    if (activeRow && activeRow.dataset.team !== this.activeTeam) {
+      activeRow.classList.remove("active-team");
+    }
+    const teamRow = document.querySelector(`[data-team="${this.activeTeam}"]`);
+    teamRow.classList.add("active-team");
   }
 
   handleGamePlay(action) {
@@ -52,7 +62,7 @@ class Game {
         this.nextQuestion();
         return this.currentQuestion;
       case "start":
-        this.counter.start();
+        this.timer.start();
         this.nextQuestion();
         return this.currentQuestion;
       default:
@@ -73,19 +83,7 @@ class Game {
     const headingRow = createHeadingRow(["Team", "Score"]);
     this.table.appendChild(headingRow);
     this.scores.forEach((score, i) => {
-      const scoreRow = document.createElement("tr");
-      scoreRow.dataset.team = i;
-      if (this.activeTeam == i) {
-        scoreRow.classList.add("active-team");
-      }
-      const teamName = document.createElement("td");
-      teamName.classList.add("team");
-      teamName.innerText = getTeamName(i);
-      scoreRow.appendChild(teamName);
-      const scoreDisplay = document.createElement("td");
-      scoreDisplay.classList.add("score");
-      scoreDisplay.innerText = score;
-      scoreRow.appendChild(scoreDisplay);
+      const scoreRow = createScoreRow(score, i);
       this.table.appendChild(scoreRow);
     });
   }
@@ -104,4 +102,18 @@ function createHeadingRow(headings) {
     headingRow.appendChild(th);
   });
   return headingRow;
+}
+
+function createScoreRow(score, index) {
+  const scoreRow = document.createElement("tr");
+  scoreRow.dataset.team = index;
+  const teamName = document.createElement("td");
+  teamName.classList.add("team");
+  teamName.innerText = getTeamName(index);
+  scoreRow.appendChild(teamName);
+  const scoreDisplay = document.createElement("td");
+  scoreDisplay.classList.add("score");
+  scoreDisplay.innerText = score;
+  scoreRow.appendChild(scoreDisplay);
+  return scoreRow;
 }
