@@ -17,8 +17,8 @@ body {
 #close-settings {
   background-image: url(./assets/images/close.svg);
   position: absolute;
-  top: 0;
-  left: 100%;
+  top: 4px;
+  left: calc(100% - 4px);
   padding: 10px;
   width: 10px;
   height: 10px;
@@ -41,7 +41,7 @@ body {
   position: relative;
   background-image: linear-gradient(red, orange);
   padding: 20px;
-  border: 3px double salmon;
+  border: 3px solid salmon;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
