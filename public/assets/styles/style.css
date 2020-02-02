@@ -142,3 +142,20 @@ tr:nth-child(even) {
 .button-svg-override:hover {
   cursor: pointer;
 }
+
+@keyframes add-background {
+  0% {
+    background-color: rgba(125, 125, 126, 0);
+  }
+  100% {
+    background-color: rgba(125, 125, 126, 0.8);
+  }
+}
+@keyframes scale-in {
+  0% {
+    transform: scale(0) translate(50vw, -50vh);
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
+}
