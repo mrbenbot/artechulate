@@ -16,10 +16,8 @@ class Counter {
   }
 
   reset() {
-    showAndHideButtons("stop");
-    clearInterval(this.timerId);
     this.count = this.numberOfSeconds;
-    this.renderClockCircle();
+    this.stop();
   }
 
   start() {
