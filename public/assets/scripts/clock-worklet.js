@@ -40,7 +40,7 @@ class ClockPainter {
         size.height / 2,
         size.height / 3,
         Math.PI * -0.5 + i * step,
-        Math.PI * -0.5 + i * step + step / 2,
+        Math.PI * -0.5 + i * step + step / 4,
         false
       );
       ctx.closePath();
