@@ -1,0 +1,22 @@
+{
+  "name": "artechulate",
+  "version": "1.0.0",
+  "description": "Articulate but for tech.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SchoolOfCode/artechulate.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SchoolOfCode/artechulate/issues"
+  },
+  "homepage": "https://github.com/SchoolOfCode/artechulate#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

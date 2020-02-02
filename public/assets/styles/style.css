@@ -7,7 +7,7 @@ body {
   margin: 0;
 }
 #open-settings {
-  background-image: url(./assets/images/settings.svg);
+  background-image: url(../images/settings.svg);
   margin: 10px;
   height: 30px;
   width: 30px;
@@ -15,7 +15,7 @@ body {
   float: right;
 }
 #close-settings {
-  background-image: url(./assets/images/close.svg);
+  background-image: url(../images/close.svg);
   position: absolute;
   top: 4px;
   left: calc(100% - 4px);
@@ -55,39 +55,42 @@ h1 {
   font-size: 4em;
 }
 #time-container {
-  --time: 1;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 44px;
   width: 100vw;
+  height: 50px;
 }
-#time-container::before {
-  height: 100px;
-  width: 100px;
-  position: absolute;
-  border-radius: 100%;
-  content: "";
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(var(--time));
-  background-color: palevioletred;
-  transition: transform 1s linear;
-}
+
 .clock-circle {
   height: 100%;
   width: 2px;
   position: absolute;
 }
-time {
+#time-container > time {
+  --timer-color: hotpink;
+  --timer-width: 4;
   font-size: 30px;
   padding: 15px;
   text-align: center;
   box-sizing: border-box;
   height: 71px;
   z-index: 10;
+  position: relative;
 }
+#time-container > time::before {
+  content: "";
+  position: absolute;
+  background-image: paint(clock-circle);
+  top: 50%;
+  left: 50%;
+  height: 130px;
+  width: 130px;
+  transform: translate(-50%, -50%);
+}
+
 .game-buttons {
   padding: 20px;
   font-size: 2rem;
