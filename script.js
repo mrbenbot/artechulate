@@ -82,6 +82,8 @@ document
 document.querySelector("#open-settings").addEventListener("click", () => {
   game.timer.stop();
   settingsModal.style.display = "flex";
+  settingsModal.classList.add("background");
+  settingsModal.querySelector("div").classList.add("animate-in");
 });
 document.querySelector("#close-settings").addEventListener("click", () => {
   settingsModal.style.display = "none";
