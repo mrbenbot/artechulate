@@ -9,7 +9,7 @@
       href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
       rel="stylesheet"
     />
-    <link href="style.css" rel="stylesheet" />
+    <link href="assets/styles/style.css" rel="stylesheet" />
   </head>
   <body>
     <button id="open-settings" class="button-svg-override"></button>
@@ -26,6 +26,13 @@
               <input type="range" id="time" min="15" max="180" step="15" value="30"></input>
               <output name="numSeconds" for="time">30</output> <span> seconds</span>
             </form>
+            <div>
+              <select id="timer-type-selector">
+                <option>solid</option>
+                <option>dashed</option>
+              </select>
+              <label> timer type</label>
+              </div>
           </div>
           <button id="save-settings">save changes</button>
         </div>
@@ -48,11 +55,12 @@
         <button class="team-buttons button" value="up">Next</button>
       </div>
     </section>
-    <script src="helpers.js"></script>
-    <script src="Counter.js"></script>
-    <script src="Game.js"></script>
-    <script src="./assets/data/week_1.js"></script>
-    <script src="./assets/data/week_2.js"></script>
-    <script src="script.js"></script>
+    <script src="assets/data/week_1.js"></script>
+    <script src="assets/data/week_2.js"></script>
+    <script src="assets/scripts/css-config.js"></script>
+    <script src="assets/scripts/Counter.js"></script>
+    <script src="assets/scripts/Game.js"></script>
+    <script src="assets/scripts/helpers.js"></script>
+    <script src="assets/scripts/script.js"></script>
   </body>
 </html>
