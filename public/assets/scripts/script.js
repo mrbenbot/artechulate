@@ -7,7 +7,7 @@ const timeContainer = document.querySelector("#time-container");
 const settingsModal = document.querySelector("#settings-container");
 
 const config = {
-  questions: [...week_1, ...week_2],
+  questions: data,
   numberOfTeams: 6,
   timeContainer,
   scoreContainer: document.querySelector("table"),

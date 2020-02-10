@@ -1,4 +1,4 @@
-const week_1 = [
+const week1 = [
   { text: "display: inline" },
   { text: "display: block" },
   { text: "display: flex" },
@@ -69,3 +69,67 @@ const week_1 = [
   { text: "JavaScript" },
   { text: "CSS" }
 ];
+
+const week2 = [
+  { text: "document.createElement" },
+  { text: "asynchronous JS" },
+  { text: "synchronous JS" },
+  { text: ".map" },
+  { text: ".filter" },
+  { text: ".reduce" },
+  { text: ".forEach" },
+  { text: ".concat" },
+  { text: "callback function" },
+  { text: "fetch" },
+  { text: "try/catch/finally" },
+  { text: "Promise" },
+  { text: ".then" },
+  { text: "dreamer room" },
+  { text: "realist room" },
+  { text: "spoiler room" },
+  { text: "JSON" },
+  { text: "JSON.parse" },
+  { text: "JSON.stringify" },
+  { text: "api" },
+  { text: "git add ." },
+  { text: "git commit" },
+  { text: "git push" },
+  { text: "console.dir" },
+  { text: "console.log" },
+  { text: "console.error" },
+  { text: "console.warn" },
+  { text: "Error" },
+  { text: "Function Composition" },
+  { text: "<form>" },
+  { text: "<input />" },
+  { text: "git branch" },
+  { text: "git checkout" },
+  { text: "Pull Request" }
+];
+
+const week3 = [
+  { text: "Node JS" },
+  { text: "Express" },
+  { text: "server" },
+  { text: "listen(PORT)" },
+  { text: "port" },
+  { text: "GET Request" },
+  { text: "POST Request" },
+  { text: "query string" },
+  { text: "url" },
+  { text: "res.send()" },
+  { text: "http" },
+  { text: "middleware" },
+  { text: "CORS" },
+  { text: "fs.readFile" },
+  { text: "fs.writeFile" },
+  { text: "require()" },
+  { text: "module.exports" },
+  { text: "util.promisify" },
+  { text: "nodemon" },
+  { text: "package.json" },
+  { text: "npm start" },
+  { text: "npm" }
+];
+
+var data = [...week1, week2, week3];
